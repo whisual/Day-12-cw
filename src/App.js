@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
 
-function App() {
+const ProgressBar = () => {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Simulate progress increment
+      setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + 10));
+    }, 500);
+
+    return () => clearInterval(interval);
+  }, []); // Empty dependency array means the effect runs once after the initial render
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h2>Loading...</h2>
+      <div style={{ border: '1px solid #ddd', borderRadius: '5px', padding: '5px', width: '300px' }}>
+        <div
+          style={{
+            width: `${progress}%`,
+            height: '20px',
+            backgroundColor: '#4CAF50',
+            borderRadius: '5px',
+          }}
+        />
+      </div>
+      <p>{`${progress}%`}</p>
     </div>
   );
-}
+};
 
-export default App;
+export default ProgressBar;
