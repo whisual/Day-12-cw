@@ -4,27 +4,32 @@ const ProgressBar = () => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => { 
-      setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + 10));
+    const interval = setInterval(() => {
+      setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + 1));
     }, 500);
 
     return () => clearInterval(interval);
-  }, []); 
+  }, []);
 
   return (
-    <div>
-      <h2>Loading...</h2>
-      <div style={{ border: '1px solid #ddd', borderRadius: '5px', padding: '5px', width: '300px' }}>
+    <div style={{
+      display: 'grid', justifyContent: 'center', textAlign: 'center'
+    }}>
+      <h4>Progress Bar</h4>
+      <div style={{ border: '1px solid Grey', borderRadius: '15px', padding: '2px', width: '500px', height: '22px', }}>
         <div
           style={{
             width: `${progress}%`,
             height: '20px',
-            backgroundColor: '#4CAF50',
-            borderRadius: '5px',
+            backgroundColor: 'Green',
+            borderRadius: '10px'
+
           }}
-        />
+        >{`${progress}%`}</div>
       </div>
-      <p>{`${progress}%`}</p>
+
+      <p>Loading...</p>
+
     </div>
   );
 };
